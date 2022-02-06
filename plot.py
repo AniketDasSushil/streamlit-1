@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np 
-import plotly.express as px
+from plotly import express
 import yfinance as yf
 st.set_page_config(page_title='Stock Dashboard',
                    page_icon=':bar_chart:',
@@ -16,9 +16,9 @@ cum_s = st.sidebar.radio('Cummulative returns',['Yes','No'])
 pct = df.pct_change()
 cum = (1+pct).cumprod()
 if cum_s == 'Yes':
-    fig = px.line(cum[select],template='presentation')
+    fig = express.line(cum[select],template='presentation')
 else:
-    fig = px.line(df[select],template='presentation')
+    fig = express.line(df[select],template='presentation')
 
 st.plotly_chart(fig)
 
